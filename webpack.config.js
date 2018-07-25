@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/client/index.tsx',
+    entry: './src/client/app/index.ts',
     output: {
         path: path.resolve(__dirname,'dist'),
         filename: 'bundle.js'
@@ -17,9 +17,5 @@ module.exports = {
     },
     resolve:{
         extensions: ['.tsx','ts','js']
-    },
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
     }
 };
