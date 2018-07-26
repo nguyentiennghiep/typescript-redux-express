@@ -1,13 +1,18 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-    entry: './src/client/app/index.ts',
-    output: {
-        path: path.resolve(__dirname,'dist'),
-        filename: 'bundle.js'
+    entry: {
+        'index': './src/client/index.tsx',
+        'test': './src/client/index.tsx'
     },
-    module:{
-        rules:[
+    output: {
+        path: path.resolve(__dirname, 'dist/public/js'),
+        filename: '[name].bundle.js'
+    },
+    devtool: "source-map",
+    module: {
+        rules: [
             {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
@@ -15,7 +20,7 @@ module.exports = {
             }
         ]
     },
-    resolve:{
-        extensions: ['.tsx','ts','js']
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js', '.jsx']
     }
 };
