@@ -1,0 +1,64 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Merriweather', serif;
+  }
+  body{
+    background: url("http://s3.amazonaws.com/codecademy-content/projects/junction/bg.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  .container{
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  /* menu */
+  .menu
+  {
+    background-color: rgba(0,0,0,.5) !important;
+    border: none !important ;
+  }
+  
+  .menu span {
+   
+  }
+  
+  /*banner */
+  
+  .banner {
+    margin-top: 150px; 
+    text-align: center;
+    
+    height: 200px;
+  }
+   .banner .container h1{
+    font-size: 60px;
+    font-weight: 30px;
+    color: aliceblue;
+  }
+  
+   .banner .container img{
+    width: 100px;
+    height: 100px;
+  }
+  
+  @media(max-width:750px)
+  {
+     .banner .container h1{
+      font-size: 40px;
+    }
+  }
+  
+  .content .item {
+    height: 300px;
+    
+  }
+  .content .item .bspanel{
+    height: 100%;
+    margin: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 10px; 
+  }
