@@ -1,14 +1,26 @@
-var gulp = require('gulp');
-var ts = require('gulp-typescript');
-var plumber = require('gulp-plumber');
-var webpackConfig = require('./webpack.config');
-var webpack = require('webpack-stream');
-var runSequence = require('run-sequence');
-var tsProject = ts.createProject('tsconfig.json');
+const gulp = require('gulp');
+const ts = require('gulp-typescript');
+const plumber = require('gulp-plumber');
+const webpackConfig = require('./webpack.config');
+const webpack = require('webpack-stream');
+const runSequence = require('run-sequence');
+const browserSync = require('browser-sync');
+const nodemon = require('gulp-nodemon');
+var exec = require("child_process").exec
 
 gulp.task("default", () => {
-    runSequence(['copy-assets', 'css'],['webpack','watch']);
+    runSequence(['copy-assets', 'css', 'tsc'], ['webpack', 'watch', 'browser-sync']);
 });
+
+// build tsc
+gulp.task('tsc', (cb) => {
+    return exec('node ./node_modules/typescript/bin/tsc', function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
+});
+
 
 // copy folder to build folder
 gulp.task('copy-assets', () => {
@@ -37,6 +49,26 @@ gulp.task('webpack', () => {
 
 
 //watch change by gulp
-gulp.task('watch',()=>{
-    return gulp.watch('./src/public/css/*.css',['css'])
+gulp.task('watch', () => {
+    return gulp.watch('./src/public/css/*.css', ['css'])
+});
+
+
+gulp.task('browser-sync', ['nodemon'], function () {
+    browserSync.init(null, {
+        proxy: "http://localhost:8000",
+    });
+});
+gulp.task('nodemon', function (cb) {
+    var started = false;
+    return nodemon({
+        script: './dist/app-server.js'
+    }).on('start', function () {
+        // to avoid nodemon being started multiple times
+        // thanks @matthisk
+        if (!started) {
+            cb();
+            started = true;
+        }
+    });
 });
