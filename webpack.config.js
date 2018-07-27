@@ -4,7 +4,6 @@ const webpack = require('webpack');
 module.exports = {
     entry: {
         'index': './src/client/index.tsx',
-        'test': './src/client/index.tsx'
     },
     output: {
         path: path.resolve(__dirname, 'dist/public/js'),
