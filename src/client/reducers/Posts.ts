@@ -1,10 +1,12 @@
-const Istate = {
-
-}
-
+import * as types from '../constant/ActionTypes';
+const Istate :any = null;
 const PostsReducer = (state = Istate,action : any) =>{
     switch(action.type){
-        default: return Istate;
+        case types.LIST_POST:{
+            return action.postList;
+
+        }
+        default: return state;
     }
 }
 export default PostsReducer;
