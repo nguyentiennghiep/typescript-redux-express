@@ -8,6 +8,11 @@ class PostList extends React.Component {
                 <div className="container">
                     <Post/>
                     <Post/>
+                    <Post/>
+                    <Post/>
+                    <Post/>
+                    <Post/>
+                    <Post/>
                 </div>
             </div>
         </div>
