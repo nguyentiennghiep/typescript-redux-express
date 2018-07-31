@@ -1,5 +1,6 @@
 import * as types from '../constant/ActionTypes';
 import axios from 'axios';
+import URL from '../../config/apiURL'
 export const listAll = (postList:any) => {
     return {
         type: types.LIST_POST,
@@ -10,7 +11,7 @@ export const listAll = (postList:any) => {
 export const fetchData = () => {
     return (dispatch:any) => {
         axios({
-            url: "http://localhost:4000/graphql",
+            url: URL,
             method: 'post',
             data: {
                 query: `
