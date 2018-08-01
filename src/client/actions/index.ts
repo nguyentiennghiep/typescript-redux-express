@@ -30,4 +30,31 @@ export const fetchData = () => {
             console.log('Error ' + error.message)
         });
     }
+};
+
+
+export const addPost = (post : any) =>{
+    return {
+        type : types.ADD_POST,
+        post
+    }
 }
+
+// export const addPostDB = (post: any) =>{
+//     return (dispatch) =>{
+//         axios({
+//             url: URL,
+//             method: 'post',
+//             data: {
+//                 query: `
+//                 query{
+//                     listPost{
+//                     _id
+//                     author
+//                     content
+//                     show
+//                     }
+//                 }
+//             `}
+//     }
+// }
