@@ -6,6 +6,10 @@ const PostsReducer = (state = Istate,action : any) =>{
             return action.postList;
 
         }
+        case types.ADD_POST:{
+           state.push(action.post);
+            return state;
+        }
         default: return state;
     }
 }

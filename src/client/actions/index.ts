@@ -1,7 +1,7 @@
 import * as types from '../constant/ActionTypes';
 import axios from 'axios';
 import URL from '../../config/apiURL'
-export const listAll = (postList:any) => {
+export const listAll = (postList: any) => {
     return {
         type: types.LIST_POST,
         postList
@@ -9,7 +9,7 @@ export const listAll = (postList:any) => {
 }
 
 export const fetchData = () => {
-    return (dispatch:any) => {
+    return (dispatch: any) => {
         axios({
             url: URL,
             method: 'post',
@@ -33,28 +33,37 @@ export const fetchData = () => {
 };
 
 
-export const addPost = (post : any) =>{
+export const addNewPost = (post: any) => {
     return {
-        type : types.ADD_POST,
+        type: types.ADD_POST,
         post
     }
 }
 
-// export const addPostDB = (post: any) =>{
-//     return (dispatch) =>{
-//         axios({
-//             url: URL,
-//             method: 'post',
-//             data: {
-//                 query: `
-//                 query{
-//                     listPost{
-//                     _id
-//                     author
-//                     content
-//                     show
-//                     }
-//                 }
-//             `}
-//     }
-// }
+export const addPostDB = (post: any) => {
+    return (dispatch: any) => {
+        axios({
+            url: URL,
+            method: 'post',
+            data: {
+                query: `
+                mutation($post : inputPost!){
+                    addPost(input: $post
+                    )
+                    {
+                      _id
+                      author
+                      title
+                      content
+                      show
+                    }
+                  }
+            `,
+            variables : JSON.stringify({post})}
+        }).then(res => {
+            dispatch(addNewPost(res.data.data.addPost))
+        }).catch(function (error) {
+            console.log('Error :' + error.message)
+        });
+    }
+};

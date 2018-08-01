@@ -1,4 +1,6 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
+import * as actions from '../../actions/index';
 
 
 class AddPost extends React.Component<any, any> {
@@ -21,7 +23,7 @@ class AddPost extends React.Component<any, any> {
 
     onSubmit = (e :any) =>{
         e.preventDefault();
-        console.log(this.state)
+        this.props.addNewPost(this.state);
     }
     
     render() {
@@ -58,5 +60,12 @@ class AddPost extends React.Component<any, any> {
     }
 }
 
+const mapDispatchToProps = (dispatch: any, props: any) => {
+    return {
+        addNewPost: (post:any) => {
+            dispatch(actions.addPostDB(post))
+        }
+    }
+};
 
-export default AddPost;
+export default connect(null,mapDispatchToProps)(AddPost);
