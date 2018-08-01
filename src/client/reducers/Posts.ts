@@ -8,7 +8,7 @@ const PostsReducer = (state = Istate,action : any) =>{
         }
         case types.ADD_POST:{
            state.push(action.post);
-            return state;
+            return {...state};
         }
         default: return state;
     }

@@ -14,3 +14,11 @@ html,body{
 .ml-10{
   margin-left: 10px;
 }
+
+.text-color{
+  color: #ffffff !important;
+}
+
+.tw{
+  height: 300px;
+}

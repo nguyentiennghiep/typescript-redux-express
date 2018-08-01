@@ -40,7 +40,7 @@ class AddPost extends React.Component<any, any> {
                                 <label>Title :</label>
                                 <input type="text" className="form-control" name="title" onChange = {this.onChange} value = {this.state.title} />
                                 <label>Content :</label>
-                                <textarea className="form-control" name="content" onChange = {this.onChange} value = {this.state.content}></textarea>
+                                <textarea className="form-control tw" name="content" onChange = {this.onChange} value = {this.state.content}></textarea>
                                 <div className="form-check">
                                     <label className="form-check-label">
                                         <input type="checkbox" className="form-check-input" name="show" value="checkedValue" checked = {this.state.show} onChange = {this.onChange}/>
