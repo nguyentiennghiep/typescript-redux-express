@@ -84,20 +84,16 @@ export const deletePostDB = (id: String) => {
             data: {
                 query: `
                 mutation($id : String!){
-                    addPost(id: $id
+                    deletePost(id: $id
                     )
                     {
                       _id
-                      author
-                      title
-                      content
-                      show
                     }
                   }
             `,
             variables : JSON.stringify({id})}
         }).then(res => {
-            dispatch(deletePost(res.data.data._id))
+            dispatch(deletePost(res.data.data.deletePost._id))
         }).catch(function (error) {
             console.log('Error :' + error.message)
         });

@@ -4,7 +4,7 @@ import * as actions from '../../actions/index';
 import { connect } from 'react-redux';
 
 class PostList extends React.Component<any, any> {
-    componentWillMount() {
+    componentDidMount() {
         this.props.fetchData();
     }
     render() {
