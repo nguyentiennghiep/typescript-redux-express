@@ -24,7 +24,6 @@ const PostsReducer = (state = Istate, action: any) => {
 
         }
         case types.DELETE_POST: {
-            console.log(action);
             var index = -1;
             index = findIndex(state, action.id);
             

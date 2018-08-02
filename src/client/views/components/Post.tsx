@@ -19,8 +19,8 @@ class Post extends React.Component<any, any> {
                 <div className="card-body">
                     <h3 className="card-title">{this.props.post.title}</h3>
                     <p className="card-text">{this.props.post.content}</p>
-                    <a className="btn btn-primary ml-10 text-color">Go somewhere</a>
-                    <a className="btn btn-danger text-color" onClick={this.onClick}>Delete</a>
+                    <a className="btn btn-primary  text-color">Go somewhere</a>
+                    <a className="btn btn-danger  ml-10 text-color" onClick={this.onClick}>Delete</a>
                 </div>
             </div>
         </div>

@@ -24,6 +24,7 @@ class AddPost extends React.Component<any, any> {
     onSubmit = (e :any) =>{
         e.preventDefault();
         this.props.addNewPost(this.state);
+        this.props.history.push('/');
     }
     
     render() {
