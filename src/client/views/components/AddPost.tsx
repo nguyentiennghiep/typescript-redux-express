@@ -1,33 +1,63 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
+import axios from 'axios';
 
 
 class AddPost extends React.Component<any, any> {
-    constructor(props:any) {
+    constructor(props: any) {
         super(props);
         this.state = {
-            author : '',
+            author: '',
             title: '',
-            content:'',
-            show : true
+            content: '',
+            show: true,
+            imgURL : '',
+            img : null,
         };
     }
 
-    onChange = (e : any) =>{
+    onChange = (e: any) => {
         var target = e.target;
         var name = target.name;
         var value = target.type === 'checkbox' ? target.checked : target.value;
         this.setState({ [name]: value });
     }
 
-    onSubmit = (e :any) =>{
+    onSubmit = (e: any) => {
         e.preventDefault();
-        this.props.addNewPost(this.state);
-        this.props.history.push('/');
+        var post = {
+            author: this.state.author,
+            title: this.state.title,
+            content:this.state.content,
+            show: this.state.show
+        }
+        this.props.addNewPost(post);
+        // this.props.history.push('/');
+        // console.log(this.state);
     }
-    
+
+    onUpLoad = (e: any) => {
+        e.preventDefault();
+        const fd = new FormData();
+        fd.append('image',this.state.img,this.state.img.name);
+        axios.post('http://localhost:4000/upload',fd)
+        .then(res => {
+            // console.log(res.data.data);
+            this.setState({imgURL : res.data.data})
+            
+            // console.log(this.state);
+        }); 
+        
+    }
+
+    onImage = (e: any) => {
+        e.preventDefault();
+        this.setState({img : e.target.files[0]});
+    }
+
     render() {
+        
         return <div>
             <div className="content mt-10">
                 <div className="container mt-10">
@@ -37,23 +67,30 @@ class AddPost extends React.Component<any, any> {
                         <div className="card-body">
                             <form className="form-group" onSubmit={this.onSubmit}>
                                 <label>Author Name :</label>
-                                <input type="text" className="form-control" name="author" onChange = {this.onChange} value = {this.state.author} />
+                                <input type="text" className="form-control" name="author" onChange={this.onChange} value={this.state.author} />
                                 <label>Title :</label>
-                                <input type="text" className="form-control" name="title" onChange = {this.onChange} value = {this.state.title} />
+                                <input type="text" className="form-control" name="title" onChange={this.onChange} value={this.state.title} />
                                 <label>Content :</label>
-                                <textarea className="form-control tw" name="content" onChange = {this.onChange} value = {this.state.content}></textarea>
+                                <textarea className="form-control tw" name="content" onChange={this.onChange} value={this.state.content}></textarea>
                                 <div className="form-check">
                                     <label className="form-check-label">
-                                        <input type="checkbox" className="form-check-input" name="show" value="checkedValue" checked = {this.state.show} onChange = {this.onChange}/>
+                                        <input type="checkbox" className="form-check-input" name="show" value="checkedValue" checked={this.state.show} onChange={this.onChange} />
                                         Show
                             </label>
-                        
+
                                 </div>
                                 <button type="submit" className="btn btn-primary" >Submit</button>
                             </form>
                         </div>
                     </div>
-
+                    <form onSubmit={this.onUpLoad} >
+                        <div className="form-group">
+                            <label ></label>
+                            <input type="file" className="form-control-file" name="image" placeholder="" onChange={this.onImage} />
+                        </div>
+                        <button type="submit" className="btn btn-primary" >Submit</button>
+                    </form>
+                    <img src={`http://localhost:4000/${this.state.imgURL}`} alt=""/>
                 </div>
             </div>
         </div>
@@ -63,10 +100,10 @@ class AddPost extends React.Component<any, any> {
 
 const mapDispatchToProps = (dispatch: any, props: any) => {
     return {
-        addNewPost: (post:any) => {
+        addNewPost: (post: any) => {
             dispatch(actions.addPostDB(post))
         }
     }
 };
 
-export default connect(null,mapDispatchToProps)(AddPost);
+export default connect(null, mapDispatchToProps)(AddPost);
