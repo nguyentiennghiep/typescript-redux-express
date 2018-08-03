@@ -21,6 +21,7 @@ export const fetchData = () => {
                     author
                     title
                     content
+                    imgURL
                     show
                     }
                 }

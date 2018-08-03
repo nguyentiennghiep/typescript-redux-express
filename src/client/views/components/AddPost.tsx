@@ -30,10 +30,11 @@ class AddPost extends React.Component<any, any> {
             author: this.state.author,
             title: this.state.title,
             content:this.state.content,
-            show: this.state.show
+            show: this.state.show,
+            imgURL : this.state.imgURL
         }
         this.props.addNewPost(post);
-        // this.props.history.push('/');
+        this.props.history.push('/');
         // console.log(this.state);
     }
 

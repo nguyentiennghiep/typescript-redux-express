@@ -16,6 +16,7 @@ class Post extends React.Component<any, any> {
                 <div className="card-header">
                     Author: {this.props.post.author}
                 </div>
+                <img className="card-img-top" src={`http://localhost:4000/${this.props.post.imgURL}`} alt="Card image cap"/>
                 <div className="card-body">
                     <h3 className="card-title">{this.props.post.title}</h3>
                     <p className="card-text">{this.props.post.content}</p>
