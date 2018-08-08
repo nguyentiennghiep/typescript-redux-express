@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-const ts = require('gulp-typescript');
 const plumber = require('gulp-plumber');
 const webpackConfig = require('./webpack.config');
 const webpack = require('webpack-stream');

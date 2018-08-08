@@ -9,11 +9,9 @@ class PostList extends React.Component<any, any> {
     }
     render() {
         var { postList } = this.props;
-        if (postList != null) {
-            var element = postList.map((item: any, index: any) => {
-                return <Post key={index} post={item} />
-            })
-        };
+        var element = postList.map((item: any, index: any) => {
+            return <Post key={index} post={item} />
+        })
 
         return <div>
             <div className="content mt-10">
