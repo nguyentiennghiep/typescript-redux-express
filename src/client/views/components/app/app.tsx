@@ -8,12 +8,12 @@ import { Switch, Route } from 'react-router-dom';
 
 const routes = [
     {
-        path: "/",
+        path: '/',
         exact: true,
         component: PostList
     },
     {
-        path: "/add",
+        path: '/add',
         exact: false,
         component: AddPost
     },
@@ -24,14 +24,13 @@ const routes = [
     }
 ];
 
-
 class App extends React.Component {
     showContent = (routes: any) => {
-        var result = '';
+        let result = '';
         if (routes.length > 0) {
             result = routes.map((route: any, index: any) => {
-                return <Route key={index} path={route.path} exact={route.exact} component={route.component} />
-            })
+                return <Route key={index} path={route.path} exact={route.exact} component={route.component} />;
+            });
         }
         return <Switch>{result}</Switch>;
     }
@@ -39,7 +38,7 @@ class App extends React.Component {
         return <div>
             <Menu />
             {this.showContent(routes)}
-        </div>
+        </div>;
 
     }
 }

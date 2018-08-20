@@ -8,10 +8,10 @@ class PostList extends React.Component<any, any> {
         this.props.fetchData();
     }
     render() {
-        var { postList } = this.props;
-        var element = postList.map((item: any, index: any) => {
-            return <Post key={index} post={item} />
-        })
+        const { postList } = this.props;
+        const element = postList.map((item: any, index: any) => {
+            return <Post key={index} post={item} />;
+        });
 
         return <div>
             <div className="content mt-10">
@@ -19,7 +19,7 @@ class PostList extends React.Component<any, any> {
                     {element}
                 </div>
             </div>
-        </div>
+        </div>;
 
     }
 }
@@ -27,15 +27,15 @@ class PostList extends React.Component<any, any> {
 const mapStateToProps = (state: any) => {
     return {
         postList: state.Posts
-    }
+    };
 };
 
 const mapDispatchToProps = (dispatch: any, props: any) => {
     return {
         fetchData: () => {
-            dispatch(actions.fetchData())
+            dispatch(actions.fetchData());
         }
-    }
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList);

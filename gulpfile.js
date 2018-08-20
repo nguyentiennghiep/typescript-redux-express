@@ -5,10 +5,12 @@ const webpack = require('webpack-stream');
 const runSequence = require('run-sequence');
 const browserSync = require('browser-sync');
 const nodemon = require('gulp-nodemon');
-var exec = require("child_process").exec
+const tslint = require("gulp-tslint");
+const exec = require("child_process").exec;
+var tslintconfig = require('./tslint.json');
 
 gulp.task("default", () => {
-    runSequence(['copy-assets', 'css', 'tsc'], ['webpack', 'watch', 'browser-sync']);
+    runSequence(['copy-assets', 'css', 'tsc','lint'], ['webpack', 'watch', 'browser-sync']);
 });
 
 // build tsc
@@ -71,3 +73,13 @@ gulp.task('nodemon', function (cb) {
         }
     });
 });
+
+
+// Lint task 
+gulp.task("lint", () =>
+    gulp.src("src/**/*.ts*")
+        .pipe(tslint({tslintconfig,formatter: "verbose"}))
+        .pipe(tslint.report({
+            reportLimit: 0
+        }))
+);

@@ -2,15 +2,15 @@ import * as types from '../constant/ActionTypes';
 const Istate: any = [];
 
 const findIndex = (array: any, id: string) => {
-    var result = -1;
-    array.forEach((item:any, index:number) => {
+    let result = -1;
+    array.forEach((item: any, index: number) => {
         if (item._id === id) {
             result = index;
         }
-    })
+    });
 
     return result;
-}
+};
 
 const PostsReducer = (state = Istate, action: any) => {
     switch (action.type) {
@@ -24,16 +24,16 @@ const PostsReducer = (state = Istate, action: any) => {
 
         }
         case types.DELETE_POST: {
-            var index = -1;
+            let index = -1;
             index = findIndex(state, action.id);
-            
+
             if (index != -1) {
-                state.splice(index,1)
+                state.splice(index, 1);
             }
-            return [...state]
+            return [...state];
         }
 
         default: return state;
     }
-}
+};
 export default PostsReducer;

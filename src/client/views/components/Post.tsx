@@ -2,11 +2,9 @@ import * as React from 'react';
 import * as actions from '../../actions/index';
 import { connect } from 'react-redux';
 
-
 class Post extends React.Component<any, any> {
     onClick = () => {
-        if (confirm('Do you really want to delete this Post?')) //eslint-disable-line
-        {
+        if (confirm('Do you really want to delete this Post?')) { //eslint-disable-line
             this.props.onDeletePost(this.props.post._id);
         }
     }
@@ -16,7 +14,7 @@ class Post extends React.Component<any, any> {
                 <div className="card-header">
                     Author: {this.props.post.author}
                 </div>
-                <img className="card-img-top" src={`http://localhost:4000/${this.props.post.imgURL}`} alt="Card image cap"/>
+                <img className="card-img-top" src={`http://localhost:4000/${this.props.post.imgURL}`} alt="Card image cap" />
                 <div className="card-body">
                     <h3 className="card-title">{this.props.post.title}</h3>
                     <p className="card-text">{this.props.post.content}</p>
@@ -24,7 +22,7 @@ class Post extends React.Component<any, any> {
                     <a className="btn btn-danger  ml-10 text-color" onClick={this.onClick}>Delete</a>
                 </div>
             </div>
-        </div>
+        </div>;
 
     }
 }
@@ -32,8 +30,8 @@ class Post extends React.Component<any, any> {
 const mapDispatchToProps = (dispatch: any, props: any) => {
     return {
         onDeletePost: (id: String) => {
-            dispatch(actions.deletePostDB(id))
+            dispatch(actions.deletePostDB(id));
         }
-    }
-}
+    };
+};
 export default connect(null, mapDispatchToProps)(Post);

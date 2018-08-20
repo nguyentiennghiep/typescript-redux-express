@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import axios from 'axios';
 
-
 class AddPost extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
@@ -12,53 +11,48 @@ class AddPost extends React.Component<any, any> {
             title: '',
             content: '',
             show: true,
-            imgURL : '',
-            img : null,
+            imgURL: '',
+            img: null,
         };
     }
 
     onChange = (e: any) => {
-        var target = e.target;
-        var name = target.name;
-        var value = target.type === 'checkbox' ? target.checked : target.value;
+        let target = e.target;
+        let name = target.name;
+        let value = target.type === 'checkbox' ? target.checked : target.value;
         this.setState({ [name]: value });
     }
 
     onSubmit = (e: any) => {
         e.preventDefault();
-        var post = {
+        const post = {
             author: this.state.author,
             title: this.state.title,
-            content:this.state.content,
+            content: this.state.content,
             show: this.state.show,
-            imgURL : this.state.imgURL
-        }
+            imgURL: this.state.imgURL
+        };
         this.props.addNewPost(post);
         this.props.history.push('/');
-        // console.log(this.state);
     }
 
     onUpLoad = (e: any) => {
         e.preventDefault();
         const fd = new FormData();
-        fd.append('image',this.state.img,this.state.img.name);
-        axios.post('http://localhost:4000/upload',fd)
-        .then(res => {
-            // console.log(res.data.data);
-            this.setState({imgURL : res.data.data})
-            
-            // console.log(this.state);
-        }); 
-        
+        fd.append('image', this.state.img, this.state.img.name);
+        axios.post('http://localhost:4000/upload', fd)
+            .then(res => {
+                this.setState({ imgURL: res.data.data });
+            });
     }
 
     onImage = (e: any) => {
         e.preventDefault();
-        this.setState({img : e.target.files[0]});
+        this.setState({ img: e.target.files[0] });
     }
 
     render() {
-        
+
         return <div>
             <div className="content mt-10">
                 <div className="container mt-10">
@@ -91,10 +85,10 @@ class AddPost extends React.Component<any, any> {
                         </div>
                         <button type="submit" className="btn btn-primary" >Submit</button>
                     </form>
-                    <img src={`http://localhost:4000/${this.state.imgURL}`} alt=""/>
+                    <img src={`http://localhost:4000/${this.state.imgURL}`} alt="" />
                 </div>
             </div>
-        </div>
+        </div>;
 
     }
 }
@@ -102,9 +96,9 @@ class AddPost extends React.Component<any, any> {
 const mapDispatchToProps = (dispatch: any, props: any) => {
     return {
         addNewPost: (post: any) => {
-            dispatch(actions.addPostDB(post))
+            dispatch(actions.addPostDB(post));
         }
-    }
+    };
 };
 
 export default connect(null, mapDispatchToProps)(AddPost);
